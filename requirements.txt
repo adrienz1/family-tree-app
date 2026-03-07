@@ -1,0 +1,3 @@
+Be able to view a person's location
+Be able to see someone's parents and sibling using a search function
+Be able to add someone to the tree using their name and a direct relative
