@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Family Members{% endblock %}
+
+{% block content %}
+<h1>Family Members</h1>
+
+<a class="button" href="/people/new">Add Member</a>
+
+<ul class="member-list">
+    {% for person in people %}
+        <li>
+            <a href="/people/{{ person.id }}">{{ person.name }}</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}{{ person.name }}{% endblock %}
+
+{% block content %}
+<h1>{ person.name }</h1>
+
+<p><strong>Birth date:</strong> {{ person.birth_date or "Not provided" }}</p>
+<p><strong>Notes:</strong> {{ person.notes or "None" }}</p>
+
+<a class="button" href="/people/{{ person.id }}/edit">Edit</a>
+
+<section>
+    <h2>Parents</h2>
+    <ul>
+        {% for parent in parents %}
+            <li><a href="/people/{{ parent.id }}">{{ parent.name }}</a></li>
+        {% else %}
+            <li>No parents linked</li>
+        {% endfor %}
+    </ul>
+</section>
+
+<section>
+    <h2>Children</h2>
+    <ul>
+        {% for child in children %}
+            <li><a href="/people/{{ child.id }}">{{ child.name }}</a></li>
+        {% else %}
+            <li>No children linked</li>
+        {% endfor %}
+    </ul>
+</section>
+
+<section>
+    <h2>Siblings</h2>
+    <ul>
+        {% for sibling in siblings %}
+            <li><a href="/people/{{ sibling.id }}">{{ sibling.name }}</a></li>
+        {% else %}
+            <li>No siblings found</li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}

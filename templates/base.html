@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Arbre Genealogique{% endblock %}</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="/" class="nav-item">🏠<span>Home</span></a>
+        <a href="/people/new" class="nav-item" onclick="">➕<span>Add</span></a>
+        <a href="/profile" class="nav-item">👤<span>Profil</span></a>
+    </nav>
+<script>
+function toggleAddPerson() {
+    const modal = document.getElementById("add-person-modal");
+    modal.classList.toggle("hidden");
+}
+</script>
+</body>
+</html>
