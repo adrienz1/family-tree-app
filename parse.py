@@ -1,7 +1,11 @@
+import os
 import re
 import json
 import unicodedata
 import uuid
+
+from dotenv import load_dotenv
+from pymongo import MongoClient
 
 NAMESPACE = uuid.UUID("12345678-1234-5678-1234-567812345678")
 
@@ -89,3 +93,21 @@ def extract_data(file_name):
     with open("family.json", "w", encoding="utf-8") as f:
         json.dump(list(family_data.values()), f, indent=4, ensure_ascii=False) # ensure ascii makes sure that the non-english characters are saved correctly in the json file. indent makes the json file more readable by adding indentation and newlines
     print("Saved family tree to family.json")
+    
+#  Insert the family data from a json file into the MongoDB database
+def upload_data():
+    load_dotenv()
+    url = os.getenv("MONGO_URI")
+    client = MongoClient(url)
+    db = client["family"]
+    collection = db["family_members"]
+    with open("family.json", "r", encoding="utf-8") as f:
+        family_data = json.load(f)
+        
+    #for person in family_data:
+    #    person["_id"] = person.pop("id")
+        
+    collection.insert_many(family_data)
+    print("Inserted family data into MongoDB")
+    
+upload_data()

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit {{ person.name }}</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <main class="container">
+        <h1>Edit Member</h1>
+
+        <form method="post" action="/people/{{ person.id }}/edit" class="card form-card">
+            <label>Name</label>
+            <input type="text" name="name" value="{{ person.name }}" required>
+
+            <label>Birth Date</label>
+            <input type="text" name="birth_date" value="{{ person.birth_date or '' }}">
+
+            <label>Notes</label>
+            <textarea name="notes">{{ person.notes or '' }}</textarea>
+
+            <button type="submit">Update</button>
+            <a class="button secondary" href="/people/{{ person.id }}">Cancel</a>
+        </form>
+    </main>
+</body>
+</html>

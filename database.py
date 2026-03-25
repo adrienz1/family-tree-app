@@ -1,33 +1,26 @@
 import os
 import json
+from dotenv import load_dotenv
 from pymongo import MongoClient
 
 class Database:
     def __init__(self):
+        load_dotenv()
         url = os.getenv("MONGO_URI")
         self.client = MongoClient(url)
         self.db = self.client["family"]
         self.collection = self.db["family_members"]
-    
-    #  Insert the family data from a json file into the MongoDB database. The JSON file is created by the parse.py script and contains the family data extracted from the text file.
-    def upload_data(self):
-        with open("family.json", "r", encoding="utf-8") as f:
-            family_data = json.load(f)
             
-        for person in family_data:
-            person["_id"] = person.pop("id")
-            
-        self.collection.insert_many(family_data)
-        print("Inserted family data into MongoDB")
-        
     def find_person_by_id(self, person_id):
         person = self.collection.find_one({"_id": person_id})
-        client = MongoClient(url)
-        db = client["family"]
-        collection = db["family_members"]
-        
-        person = collection.find_one({"_id": person_id})
         return person
+    
+    def find_person_by_name(self, name):
+        person = self.collection.find({"name": {
+            "$regex": name,
+            "$options": "i"  # case-insensitive
+        }})
+        return list(person)
 
     def find_parents(self, person_id):
         person = self.collection.find_one({"_id": person_id})
@@ -45,3 +38,19 @@ class Database:
     def find_children(self, person_id):
         children = self.collection.find({"parents": person_id})
         return list(children)   
+    
+    def add_person(self, person_data):
+        result = self.collection.insert_one(person_data)
+        return str(result.inserted_id)
+    
+    def get_all_people(self):
+        people = self.collection.find()
+        return list(people)
+    
+    def update_person(self, person_id, update_data):
+        result = self.collection.update_one({"_id": person_id}, {"$set": update_data})
+        return result.modified_count > 0
+    
+    def create_person(self, person_data):
+        result = self.collection.insert_one(person_data)
+        return str(result.inserted_id)

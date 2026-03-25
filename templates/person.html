@@ -1,45 +1,50 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ person.name }}</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <main class="container">
+        <h1>{{ person.name }}</h1>
 
-{% block title %}{{ person.name }}{% endblock %}
+        <div class="card">
+            <p><strong>Location:</strong> {{ person.location or "None" }}</p>
+            <p><strong>Epoux/se:</strong> {{ person.partner or "None" }}</p>
+            <p><strong>Generation:</strong> {{ person.generation or "None" }}</p>
+        </div>
 
-{% block content %}
-<h1>{ person.name }</h1>
+        <div class="card">
+            <h2>Parents</h2>
+            <ul>
+                {% for parent in parents %}
+                    <li>
+                        <a href="/people/{{ parent.id }}">{{ parent.name }}</a>
+                    </li>
+                {% else %}
+                    <li>Pas de parents enregistres</li>
+                {% endfor %}
+            </ul>
+        </div>
 
-<p><strong>Birth date:</strong> {{ person.birth_date or "Not provided" }}</p>
-<p><strong>Notes:</strong> {{ person.notes or "None" }}</p>
-
-<a class="button" href="/people/{{ person.id }}/edit">Edit</a>
-
-<section>
-    <h2>Parents</h2>
-    <ul>
-        {% for parent in parents %}
-            <li><a href="/people/{{ parent.id }}">{{ parent.name }}</a></li>
-        {% else %}
-            <li>No parents linked</li>
-        {% endfor %}
-    </ul>
-</section>
-
-<section>
-    <h2>Children</h2>
-    <ul>
-        {% for child in children %}
-            <li><a href="/people/{{ child.id }}">{{ child.name }}</a></li>
-        {% else %}
-            <li>No children linked</li>
-        {% endfor %}
-    </ul>
-</section>
-
-<section>
-    <h2>Siblings</h2>
-    <ul>
-        {% for sibling in siblings %}
-            <li><a href="/people/{{ sibling.id }}">{{ sibling.name }}</a></li>
-        {% else %}
-            <li>No siblings found</li>
-        {% endfor %}
-    </ul>
-</section>
-{% endblock %}
+        <div class="card">
+            <h2>Enfants</h2>
+            <ul>
+                {% for child in children %}
+                    <li>
+                        <a href="/people/{{ child.id }}">{{ child.name }}</a>
+                    </li>
+                {% else %}
+                    <li>No children listed</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="actions">
+            <a class="button" href="/people/{{ person.id }}/edit">Edit</a>
+            <a class="button secondary" href="/">Back</a>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,14 +1,28 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Member</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <main class="container">
+        <h1>Add Family Member</h1>
 
-{% block title %}Add Member{% endblock %}
+        <form method="post" action="/people/new" class="card form-card">
+            <label>Name</label>
+            <input type="text" name="name" required>
 
-{% block content %}
-<h1>Add Family Member</h1>
+            <label>Birth Date</label>
+            <input type="text" name="birth_date">
 
-<form method="post" action="/people/new" class="form-card">
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" required>
+            <label>Notes</label>
+            <textarea name="notes"></textarea>
 
-    <button type="submit">Save</button>
-</form>
-{% endblock %}
+            <button type="submit">Save</button>
+            <a class="button secondary" href="/">Back</a>
+        </form>
+    </main>
+</body>
+</html>
