@@ -21,7 +21,7 @@
             <ul>
                 {% for parent in parents %}
                     <li>
-                        <a href="/people/{{ parent.id }}">{{ parent.name }}</a>
+                        <a href="/people/{{ parent._id }}">{{ parent.name }}</a>
                     </li>
                 {% else %}
                     <li>Pas de parents enregistres</li>
@@ -34,15 +34,15 @@
             <ul>
                 {% for child in children %}
                     <li>
-                        <a href="/people/{{ child.id }}">{{ child.name }}</a>
+                        <a href="/people/{{ child._id }}">{{ child.name }}</a>
                     </li>
                 {% else %}
-                    <li>No children listed</li>
+                    <li>Pas d'enfants enregistres</li>
                 {% endfor %}
             </ul>
         </div>
         <div class="actions">
-            <a class="button" href="/people/{{ person.id }}/edit">Edit</a>
+            <a class="button" href="/people/{{ person._id }}/add_person">Ajouter un Enfant</a>
             <a class="button secondary" href="/">Back</a>
         </div>
     </main>

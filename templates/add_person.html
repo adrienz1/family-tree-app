@@ -8,20 +8,20 @@
 </head>
 <body>
     <main class="container">
-        <h1>Add Family Member</h1>
+        <h1>Ajouter un Membre de la Famille</h1>
 
-        <form method="post" action="/people/new" class="card form-card">
-            <label>Name</label>
+        <form method="post" action="/people/{{ parent._id }}/add_person" class="card form-card">
+            <label>Nom</label>
             <input type="text" name="name" required>
 
-            <label>Birth Date</label>
-            <input type="text" name="birth_date">
+            <label>Location</label>
+            <input type="text" name="location">
 
-            <label>Notes</label>
-            <textarea name="notes"></textarea>
+            <label>Epoux/se</label>
+            <input type="text" name="partner">
 
-            <button type="submit">Save</button>
-            <a class="button secondary" href="/">Back</a>
+            <button type="submit">Enregistrer</button>
+            <a class="button secondary" href="/">Retour</a>
         </form>
     </main>
 </body>

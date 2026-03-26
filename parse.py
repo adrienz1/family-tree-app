@@ -70,6 +70,16 @@ def extract_data(file_name):
             if line.startswith("$"):
                 parent2_id = name_to_uuid(line[1:].strip() + str(parent_generation))
                 family_data[parent1_id]["partner"] = parent2_id
+                parent2_doc = {
+                        "_id": parent2_id,
+                        "name": line[1:].strip(),
+                        "location": None,
+                        "partner": parent1_id,
+                        "generation": parent_generation,
+                        "parents": []
+                    }
+                
+                family_data[parent2_id] = parent2_doc
                 continue
             
             # Child line
@@ -110,4 +120,5 @@ def upload_data():
     collection.insert_many(family_data)
     print("Inserted family data into MongoDB")
     
-upload_data()
+#extract_data("family.txt")
+#upload_data()
