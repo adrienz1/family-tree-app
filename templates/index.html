@@ -8,15 +8,13 @@
 </head>
 <body>
     <main class="container">
-        <h1>Descendants Dago</h1>
-
-        <a class="button" href="/people/new">Nouveau membre</a>
+        <h1 class = "page-title">Descendants Dago</h1>
 
         <form method="get" action="/" class="search-form">
             <input
                 type="text"
                 name="q"
-                placeholder="Search by name"
+                placeholder="Recherche par nom"
                 value="{{ query or '' }}"
             >
             <button type="submit">Chercher</button>
@@ -25,8 +23,8 @@
         <ul class="card-list">
             {% for person in people %}
                 <li class="card">
-                    <a href="/people/{{ person._id }}">{{ person.name }}</a>
-                    <p>{{ person.location or "Pas de location" }}</p>
+                    <a href="/people/{{ person._id }}" class = "person-link" >{{ person.name }}</a>
+                    <p class = "person-location">{{ person.location or "Pas de location" }}</p>
                 </li>
             {% else %}
                 <li class="card">No family members yet.</li>

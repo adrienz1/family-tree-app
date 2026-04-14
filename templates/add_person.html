@@ -8,17 +8,29 @@
 </head>
 <body>
     <main class="container">
-        <h1>Ajouter un Membre de la Famille</h1>
+        <h1 class="page-title">Nouveau membre de la famille</h1>
 
         <form method="post" action="/people/{{ parent._id }}/add_person" class="card form-card">
             <label>Nom</label>
-            <input type="text" name="name" required>
+            <input 
+                type="text"
+                name="name"
+                placeholder="Nom du membre de la famille"
+                value="{{ query or '' }}" required>
 
             <label>Location</label>
-            <input type="text" name="location">
+            <input 
+                type="text"
+                name="location"
+                placeholder="Location du membre de la famille"
+                value="{{ query or '' }}">
 
             <label>Epoux/se</label>
-            <input type="text" name="partner">
+            <input 
+                type="text"
+                name="partner"
+                placeholder="Epoux/se"
+                value="{{ query or '' }}">
 
             <button type="submit">Enregistrer</button>
             <a class="button secondary" href="/">Retour</a>

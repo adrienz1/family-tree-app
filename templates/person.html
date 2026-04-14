@@ -8,7 +8,7 @@
 </head>
 <body>
     <main class="container">
-        <h1>{{ person.name }}</h1>
+        <h1 class = "page-title">{{ person.name }}</h1>
 
         <div class="card">
             <p><strong>Location:</strong> {{ person.location or "None" }}</p>
@@ -21,7 +21,7 @@
             <ul>
                 {% for parent in parents %}
                     <li>
-                        <a href="/people/{{ parent._id }}">{{ parent.name }}</a>
+                        <a href="/people/{{ parent._id }}" class = "person-link">{{ parent.name }}</a>
                     </li>
                 {% else %}
                     <li>Pas de parents enregistres</li>
@@ -34,7 +34,7 @@
             <ul>
                 {% for child in children %}
                     <li>
-                        <a href="/people/{{ child._id }}">{{ child.name }}</a>
+                        <a href="/people/{{ child._id }}" class = "person-link">{{ child.name }}</a>
                     </li>
                 {% else %}
                     <li>Pas d'enfants enregistres</li>

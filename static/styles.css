@@ -1,10 +1,37 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f5f6fa;
+    background: black;
     color: #222;
 }
 
+p {
+    font-size: 1.5rem;
+    color: white;
+    font-weight: bold;
+}
+label {
+    font-size: 1.2rem;
+    color: #ccc;
+}
+
+h2{
+    color: white;
+}
+
+u1 {
+    list-style: none;
+    padding: 0;
+    color: white;
+}
+
+.page-title {
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-size: 4rem;
+    color: white;
+}
 .container {
     max-width: 700px;
     margin: 0 auto;
@@ -21,7 +48,7 @@ h1 {
 }
 
 .card {
-    background: white;
+    background: rgb(0, 0, 0);
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 1rem;
@@ -42,6 +69,8 @@ a.button {
     padding: 0.75rem;
     border-radius: 8px;
 }
+
+
 
 input,
 textarea {
@@ -64,9 +93,25 @@ a.button.secondary {
 }
 
 .actions {
+    align-content: center;
     display: flex;
     gap: 0.75rem;
     margin-top: 1rem;
+}
+
+.person-link {
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: white;
+    font-weight: bold;
+}
+
+.person-link:hover {
+    text-decoration: underline;
+}
+.person-location {
+    font-size: 1.2rem;
+    color: #ccc;
 }
 
 @media (max-width: 600px) {
