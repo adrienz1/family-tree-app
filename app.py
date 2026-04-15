@@ -3,8 +3,8 @@ from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 
-from database import Database
-from parse import name_to_uuid
+from backend.database import Database
+from backend.parse import name_to_uuid
 
 app = FastAPI()
 database = Database()

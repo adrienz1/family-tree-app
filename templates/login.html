@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <main class="container">
+        <h1 class="page-title">Connection</h1>
+        <form method="post" action="/login" class="card form-card">
+            <label>Nom d'utilisateur</label>
+            <input 
+                type="text"
+                name="username"
+                placeholder="Entre ton nom d'utilisateur"
+                required>
+
+            <label>Mot de passe</label>
+            <input 
+                type="password"
+                name="password"
+                placeholder="Entre ton mot de passe"
+                required>
+
+            <button type="submit">Soumettre</button>
+        </form>
+    </main>
+</body>
+</html>
