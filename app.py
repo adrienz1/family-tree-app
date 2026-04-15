@@ -15,6 +15,7 @@ templates = Jinja2Templates(directory="templates")
 
 @app.get("/")
 def home(request: Request, q: str = Query(None)):
+    print("TEMPLATES LOADER:", templates.env.loader)
     if q:
         people = database.find_person_by_name(q.strip())
     else:
