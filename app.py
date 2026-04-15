@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request, Form, HTTPException, Query
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
+from jinja2 import select_autoescape
 
 from backend.database import Database
 from backend.parse import name_to_uuid
@@ -10,7 +11,8 @@ app = FastAPI()
 database = Database()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory="templates",
+                            autoescape=select_autoescape(["html", "xml"]))
 
 
 @app.get("/")

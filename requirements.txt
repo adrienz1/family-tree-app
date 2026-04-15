@@ -1,7 +1,8 @@
-fastapi
 uvicorn
-jinja2
 pymongo
 bcrypt
 python-dotenv
 python-multipart
+jinja2==3.1.4
+starlette==0.37.2
+fastapi==0.115.0
