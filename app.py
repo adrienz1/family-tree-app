@@ -19,12 +19,12 @@ def home(request: Request, q: str = Query(None)):
         people = database.find_person_by_name(q.strip())
     else:
         people = database.get_all_people()
-    print(people)
-    print(type(people))
     
     return templates.TemplateResponse(
         "index.html",
-        {"request": request, "people": people}
+        {"request": request, 
+         "people": people,
+         "query": q}
     )
 
 @app.get("/people/{person_id}")
