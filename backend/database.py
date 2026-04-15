@@ -35,7 +35,7 @@ class Database:
         return parents
     
     def find_children(self, person_id):
-        children = self.collection.find({"parents": person_id})
+        children = self.collection.find({"parents": {"$in": [person_id]}})
         return list(children)   
     
     def add_person(self, person_data):
