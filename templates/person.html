@@ -11,21 +11,26 @@
         <h1 class = "page-title">{{ person.name }}</h1>
 
         <div class="card">
-            <p><strong>Location:</strong> {{ person.location or "None" }}</p>
-            <p><strong>Epoux/se:</strong> {{ person.partner or "None" }}</p>
-            <p><strong>Generation:</strong> {{ person.generation or "None" }}</p>
+            <p><strong>Location:</strong> {{ person.location or "Aucune" }}</p>
+            <p><strong>Epoux/se:</strong> {{ spouse.name if spouse else "Aucun/e" }}</p>
+            <p><strong>Generation:</strong> {{ person.generation }}</p>
         </div>
 
         <div class="card">
             <h2>Parents</h2>
             <ul>
-                {% for parent in parents %}
+                {% if parent%}
                     <li>
                         <a href="/people/{{ parent._id }}" class = "person-link">{{ parent.name }}</a>
                     </li>
+                    {% if parent2 %}
+                        <li>
+                            <a class = "person-link" onmouseover="this.style.textDecoration='none'" >{{ parent2.name }}</a>
+                        </li>
+                    {% endif %}
                 {% else %}
                     <li>Pas de parents enregistres</li>
-                {% endfor %}
+                {% endif %}
             </ul>
         </div>
 
@@ -42,8 +47,11 @@
             </ul>
         </div>
         <div class="actions">
-            <a class="button" href="/people/{{ person._id }}/add_person">Ajouter un Enfant</a>
-            <a class="button secondary" href="/">Back</a>
+            {% if request.session.get('is_admin') %}
+                <a class="button" href="/people/{{ person._id }}/add_person">Ajouter un Enfant</a>
+                <a class="button" href="/people/{{ person._id }}/edit">Modifier</a>
+            {% endif %}
+            <a class="button secondary" href="/">Retour</a>
         </div>
     </main>
 </body>

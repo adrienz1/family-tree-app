@@ -8,23 +8,30 @@
 </head>
 <body>
     <main class="container">
-        <h1 class="page-title">Connection</h1>
-        <form method="post" action="/login" class="card form-card">
+        <h1 class="page-title">Administrateur</h1>
+        {% if not request.session.get('is_admin') %}
+        <form method="post" action="/login" class="login-form">
             <label>Nom d'utilisateur</label>
             <input 
                 type="text"
                 name="username"
-                placeholder="Entre ton nom d'utilisateur"
-                required>
+                placeholder="Entrez votre nom d'utilisateur"
+                required
+                oninvalid="this.setCustomValidity('Entrez votre nom d'utilisateur')"
+                oninput="this.setCustomValidity('')">
 
             <label>Mot de passe</label>
             <input 
                 type="password"
                 name="password"
-                placeholder="Entre ton mot de passe"
+                placeholder="Entrez votre mot de passe"
+                oninvalid="this.setCustomValidity('Entrez votre mot de passe')"
+                oninput="this.setCustomValidity('')"
                 required>
 
             <button type="submit">Soumettre</button>
+            {% endif %}
+            <a class="button secondary" href="/">Retour</a>
         </form>
     </main>
 </body>

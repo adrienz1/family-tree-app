@@ -1,6 +1,8 @@
 #secrets
 .env
+parse.py
 
 #Data files
 family.json
 family.txt
+spouses.json

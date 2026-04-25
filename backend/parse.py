@@ -1,3 +1,4 @@
+import hashlib
 import os
 import re
 import json
@@ -68,6 +69,8 @@ def extract_data(file_name):
             
             # Detect partner line
             if line.startswith("$"):
+                if line.endswith("*"):
+                    line = line[:-1]
                 parent2_id = name_to_uuid(line[1:].strip() + str(parent_generation))
                 family_data[parent1_id]["partner"] = parent2_id
                 parent2_doc = {
@@ -119,6 +122,26 @@ def upload_data():
         
     collection.insert_many(family_data)
     print("Inserted family data into MongoDB")
+    
+
+def create_admin(username, password):
+    load_dotenv()
+    url = os.getenv("MONGO_URI")
+    client = MongoClient(url)
+    db = client["family"]
+    admin_collection = db["admins"]
+    
+    salt = uuid.uuid4().hex
+    salted_password = password + salt
+    hashed_password = hashlib.sha256(salted_password.encode()).hexdigest()
+    
+    admin_doc = {
+        "username": username,
+        "password": salt + hashed_password  # Store salt and hashed password together
+    }
+    
+    admin_collection.insert_one(admin_doc)
+    print(f"Admin user '{username}' created successfully.")
     
 #extract_data("family.txt")
 #upload_data()

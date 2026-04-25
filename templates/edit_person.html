@@ -8,20 +8,33 @@
 </head>
 <body>
     <main class="container">
-        <h1>Edit Member</h1>
+        <h1 class="page-title">Modifier {{ person.name }}</h1>
 
-        <form method="post" action="/people/{{ person.id }}/edit" class="card form-card">
-            <label>Name</label>
-            <input type="text" name="name" value="{{ person.name }}" required>
+        <form method="post" action="/people/{{ person._id }}/edit" class="card form-card">
+            <label>Nom</label>
+            <input 
+                type="text"
+                name="name"
+                placeholder="Nom du membre de la famille"
+                value="{{ person.name or '' }}" required
+                >
 
-            <label>Birth Date</label>
-            <input type="text" name="birth_date" value="{{ person.birth_date or '' }}">
+            <label>Location</label>
+            <input 
+                type="text"
+                name="location"
+                placeholder="{{person.location or ''}}"
+                value="{{ query or '' }}">
 
-            <label>Notes</label>
-            <textarea name="notes">{{ person.notes or '' }}</textarea>
+            <label>Epoux/se</label>
+            <input 
+                type="text"
+                name="spouse"
+                placeholder="{{person.spouse or ''}}"
+                value="{{ query or '' }}">
 
-            <button type="submit">Update</button>
-            <a class="button secondary" href="/people/{{ person.id }}">Cancel</a>
+            <button type="submit">Enregistrer</button>
+            <a class="button secondary" href="/people/{{ person._id }}">Annuler</a>
         </form>
     </main>
 </body>

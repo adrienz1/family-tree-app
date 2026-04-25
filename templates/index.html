@@ -10,6 +10,11 @@
     <main class="container">
         <h1 class = "page-title">Descendants Dago</h1>
 
+        <div class="top-bar">
+            <a href="/" class="home-logo">🏠</a>
+            <a href="/login" class="admin-link">Administrateur</a>
+        </div>
+
         <form method="get" action="/" class="search-form">
             <input
                 type="text"
@@ -17,7 +22,7 @@
                 placeholder="Recherche par nom"
                 value="{{ query or '' }}"
             >
-            <button type="submit">Chercher</button>
+            <button type="submit" >Chercher</button>
         </form>
         
         <ul class="card-list">
@@ -27,7 +32,7 @@
                     <p class = "person-location">{{ person.location or "Pas de location" }}</p>
                 </li>
             {% else %}
-                <li class="card">No family members yet.</li>
+                <li class="card">Pas de membres de famille enregistrés.</li>
             {% endfor %}
         </ul>
     </main>
