@@ -53,6 +53,10 @@ class Database:
         result = self.collection.insert_one(person_data)
         return str(result.inserted_id)
     
+    def add_spouse(self, spouse_data):
+        result = self.spouse_collection.insert_one(spouse_data)
+        return str(result.inserted_id)
+    
     def get_all_people(self):
         people = self.collection.find().sort([
             ("generation", 1),
@@ -77,10 +81,21 @@ class Database:
         if updated_data.get("spouse"):
             spouse_name = updated_data["spouse"]
             spouse_id = name_to_uuid(spouse_name + str(generation))
-
             if person.get("spouse") != spouse_id:
                 update_fields["spouse"] = spouse_id
-
+                
+                existing_spouse = self.find_person_by_id(spouse_id)
+                if not existing_spouse:
+                    spouse_doc = create_person(
+                        id=spouse_id,
+                        name=spouse_name,
+                        location=None,
+                        spouse=person_id,
+                        generation=generation,
+                        parents=[]
+                        )
+                    self.add_spouse(spouse_doc)
+                    
         if not update_fields:
             return False
 
