@@ -192,12 +192,13 @@ def extract_data(file_name):
             if line.startswith("$"):
                 if line.endswith("*"):
                     line = line[:-1]
-                parent2_id = name_to_uuid(line[1:].strip() + str(parent_generation))
+                name, location = clean_name(line[1:].strip())
+                parent2_id = name_to_uuid(name + str(parent_generation))
                 family_data[parent1_id]["spouse"] = parent2_id
                 parent2_doc = create_person(
                     id=parent2_id,
-                    name=line[1:].strip(),
-                    location=None,
+                    name=name,
+                    location=location,
                     spouse=parent1_id,
                     generation=parent_generation,
                     parents=[]
@@ -249,4 +250,3 @@ def upload_data():
         spouse_data = json.load(f)
     collection2.insert_many(spouse_data)
     print("Inserted spouse data into MongoDB")
-    
